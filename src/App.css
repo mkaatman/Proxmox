@@ -19,13 +19,31 @@ h1 a{
   text-decoration: none;
 }
 
+.itemCategory {
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+
 .item {
-  margin-left: 32px;
+  margin-left: 40px;
+  margin-bottom: 16px;
+  margin-top: 4px;
+  padding: 16px;
+  border: 1px solid #888
 }
 
 .itemTitle {
-  font-size: 20px;
+  font-size: 16px;
   color: #b5e853;
+  margin-left: 16px;
+}
+
+.typeFilter {
+  margin-left: 32px;
+}
+
+.typeFilterSelected {
+  color: #63c0f5
 }
 
 .inputFilter {
