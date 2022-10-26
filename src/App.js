@@ -9,6 +9,7 @@ import rehypeRaw from 'rehype-raw';
 
 function App() {
   const [filter, setFilter] = useState("");
+  const [expanded, setExpanded] = useState([]);
 
   function handleFilter(event) {
     // TODO: Add a debounce here
@@ -24,6 +25,14 @@ function App() {
 
   // console.warn(filtered);
 
+  function handleExpand(event) {
+    console.warn(event);
+    const newExpanded = expanded.includes(event) ? expanded.filter(i => i !== event) : [...expanded, event];
+    setExpanded(newExpanded);
+  }
+
+console.warn("expanded", expanded);
+
   return (
     <div className="App">
       <h2 align="center" id="heading"> Select a Proxmox Helper </h2>
@@ -31,10 +40,12 @@ function App() {
       <p align="center"><a href="https://github.com/tteck/Proxmox/blob/main/LICENSE"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-blue" /></a> <a href="https://github.com/tteck/Proxmox/discussions"><img src="https://img.shields.io/badge/%F0%9F%92%AC-Discussions-orange" alt="Discussions" /></a> <a href="https://github.com/tteck/Proxmox/blob/main/CHANGELOG.MD"><img src="https://img.shields.io/badge/🔶-Changelog-blue" alt="Changelog" /></a> <a href="https://ko-fi.com/D1D7EP4GF"><img src="https://img.shields.io/badge/%E2%98%95-Buy%20me%20a%20coffee-red" alt="Buy me a coffee" /></a></p>
 
         <div className={"inputFilter"}><input type="text" onChange={handleFilter} value={filter} /> Filter</div>
+        {filtered.items.length === 0 && <div>No items match your criteria</div>} 
         {filtered.items?.map(item => {
           return <div className={"App-items"} key={item.title}>
-            <span className={"itemTitle"}>• {item.category}: <img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" />{item.title}</span>
-            <div style={{display: "none"}} >
+            <span onClick={() => handleExpand(item.title)} className={"itemTitle"}>• {item.category}: <img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" />{item.title}</span>
+            {
+              (filter || expanded.includes(item.title)) && <div className="item">
             <ReactMarkdown
             children={item.content} 
             remarkPlugins={[remarkGfm]}
@@ -58,7 +69,7 @@ function App() {
               }
             }}
             />
-            </div>
+            </div>}
           </div>;
         })}
 
