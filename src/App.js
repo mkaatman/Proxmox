@@ -60,9 +60,9 @@ function App() {
         {filtered.items?.map((item, index) => {
           return <div className={"App-items"} key={item.title}>
             {/* Show Category */}
-            {(index === 0 || filtered.items[index === 0 ? 0 : index - 1].category !== item.category) && <div onClick={() => handleCategoryClick(item.category)} className={"itemCategory"}>{item.category}{((filter || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) ? " ⬇️" : " ➡️"} </div>}
+            {(index === 0 || filtered.items[index === 0 ? 0 : index - 1].category !== item.category) && <div onClick={() => handleCategoryClick(item.category)} className={"itemCategory"}><img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" />{item.category}{((filter || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) ? " ⬇️" : " ➡️"} </div>}
             {/* Show Item Title */}
-            {((filter || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) && <span onClick={() => handleExpandItem(item.title)} className={"itemTitle"}><img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" />{item.title}</span>}
+            {((filter || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) && <span onClick={() => handleExpandItem(item.title)} className={"itemTitle"}>{item.title}</span>}
             {
               (filter || expandedItems.includes(item.title)) && <div className="item">
             <ReactMarkdown
