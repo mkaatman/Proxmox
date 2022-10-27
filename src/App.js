@@ -10,13 +10,30 @@ import rehypeRaw from 'rehype-raw';
 function App() {
   const [filter, setFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
-  const [expanded, setExpanded] = useState([]);
+  const [expandedItems, setExpandedItems] = useState([]);
+  const [expandedCategories, setExpandedCategories] = useState([]);
 
   function handleFilter(event) {
     // TODO: Add a debounce here
-    // console.warn(event.target.value);
     setFilter(event.target.value);
   }
+
+  function handleExpandItem(event) {
+    const newExpanded = expandedItems.includes(event) ? expandedItems.filter(i => i !== event) : [...expandedItems, event];
+    setExpandedItems(newExpanded);
+  }
+
+  function handleCategoryClick(event) {
+    const newExpandedCategory = expandedCategories.includes(event) ? expandedCategories.filter(i => i !== event) : [...expandedCategories, event];
+    setExpandedCategories(newExpandedCategory);
+  }
+
+  function handleTypeFilterClick(type) {
+    setTypeFilter(type);
+  }
+
+  const types = data.items.map(item => item.type);
+
   const filtered = {};
   const typeFilteredItems = {};
   typeFilteredItems.items = typeFilter !== "all" ? data.items.filter(item => {
@@ -28,21 +45,10 @@ function App() {
     return item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase());
   }) : typeFilteredItems.items;
 
+
   // console.warn(filtered);
-
-  function handleExpand(event) {
-    // console.warn(event);
-    const newExpanded = expanded.includes(event) ? expanded.filter(i => i !== event) : [...expanded, event];
-    setExpanded(newExpanded);
-  }
-
-  function handleTypeFilterClick(type) {
-    setTypeFilter(type);
-  }
-
-  const types = data.items.map(item => item.type);
-// console.warn(types);
-// console.warn("expanded", expanded);
+  // console.warn(types);
+  // console.warn("expanded", expanded);
   return (
     <div className="App">
       <h2 align="center" id="heading"> Select a Proxmox Helper </h2>
@@ -53,10 +59,12 @@ function App() {
         {filtered.items.length === 0 && <div>No items match your criteria</div>} 
         {filtered.items?.map((item, index) => {
           return <div className={"App-items"} key={item.title}>
-            {(index === 0 || filtered.items[index === 0 ? 0 : index - 1].category !== item.category) && <div className={"itemCategory"}>{item.category}: </div>}
-            <span onClick={() => handleExpand(item.title)} className={"itemTitle"}><img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" />{item.title}</span>
+            {/* Show Category */}
+            {(index === 0 || filtered.items[index === 0 ? 0 : index - 1].category !== item.category) && <div onClick={() => handleCategoryClick(item.category)} className={"itemCategory"}>{item.category}{((filter || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) ? " ⬇️" : " ➡️"} </div>}
+            {/* Show Item Title */}
+            {((filter || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) && <span onClick={() => handleExpandItem(item.title)} className={"itemTitle"}><img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" />{item.title}</span>}
             {
-              (filter || expanded.includes(item.title)) && <div className="item">
+              (filter || expandedItems.includes(item.title)) && <div className="item">
             <ReactMarkdown
             children={item.content} 
             remarkPlugins={[remarkGfm]}
