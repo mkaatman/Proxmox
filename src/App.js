@@ -3,7 +3,10 @@ import {useState} from "react";
 import data from "./data";
 import ReactMarkdown from 'react-markdown';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
-import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism';
+// Theme examples: https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/prism.html
+import {coldarkDark} from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 
@@ -80,7 +83,7 @@ function App() {
                 return !inline && match ? (
                   <SyntaxHighlighter
                     children={String(children).replace(/\n$/, '')}
-                    style={dark}
+                    style={coldarkDark}
                     language={match[1]}
                     PreTag="div"
                     {...props}
