@@ -20,6 +20,12 @@ h1{
 h1 a{
   text-decoration: none;
 }
+.navArrow {
+  margin-left:4px;
+  height: 16px;
+  width: 16px;
+  vertical-align: text-bottom;
+}
 
 .itemCategory {
   margin-top: 16px;

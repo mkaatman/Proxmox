@@ -68,7 +68,7 @@ function App() {
         {filtered.items?.map((item, index) => {
           return <div className={"App-items"} key={item.title}>
             {/* Show Category */}
-            {(index === 0 || filtered.items[index === 0 ? 0 : index - 1].category !== item.category) && <div onClick={() => handleCategoryClick(item.category)} className={"itemCategory"}><img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" />{item.category}{((filter || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) ? " ⬇️" : " ➡️"} </div>}
+            {(index === 0 || filtered.items[index === 0 ? 0 : index - 1].category !== item.category) && <div onClick={() => handleCategoryClick(item.category)} className={"itemCategory"}><img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" />{item.category}{((filter || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) ? <img className="navArrow" src="Proxmox/images/down_arrow.svg" alt="Expanded" /> : <img className="navArrow" src="Proxmox/images/right_arrow.svg" alt="Collapsed" />} </div>}
             {/* Show Item Title */}
             {((filter || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) && <span onClick={() => handleExpandItem(item.title)} className={"itemTitle"}>{item.title}</span>}
             {
