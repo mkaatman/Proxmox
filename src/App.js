@@ -5,10 +5,10 @@ import ReactMarkdown from 'react-markdown';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 // Theme examples: https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/prism.html
 import {coldarkDark} from 'react-syntax-highlighter/dist/esm/styles/prism';
-
-
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import RightArrow from "./components/right_arrow";
+import DownArrow from "./components/down_arrow";
 
 function App() {
   const [filter, setFilter] = useState("");
@@ -68,7 +68,7 @@ function App() {
         {filtered.items?.map((item, index) => {
           return <div className={"App-items"} key={item.title}>
             {/* Show Category */}
-            {(index === 0 || filtered.items[index === 0 ? 0 : index - 1].category !== item.category) && <div onClick={() => handleCategoryClick(item.category)} className={"itemCategory"}><img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" />{item.category}{((filter || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) ? <img className="navArrow" src="Proxmox/images/down_arrow.svg" alt="Expanded" /> : <img className="navArrow" src="Proxmox/images/right_arrow.svg" alt="Collapsed" />} </div>}
+            {(index === 0 || filtered.items[index === 0 ? 0 : index - 1].category !== item.category) && <div onClick={() => handleCategoryClick(item.category)} className={"itemCategory"}><img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" />{item.category}{((filter || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) ? <DownArrow className="navArrow" alt="Expanded" /> : <RightArrow className="navArrow" alt="Collapsed" />} </div>}
             {/* Show Item Title */}
             {((filter || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) && <span onClick={() => handleExpandItem(item.title)} className={"itemTitle"}>{item.title}</span>}
             {
