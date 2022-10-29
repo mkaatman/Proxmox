@@ -91,7 +91,7 @@ function App() {
   // console.warn("expandedCategories", expandedCategories);
   // console.warn("expandedItems", expandedItems);
 
-  const filtered = filter.length ? filterData(data, filter, typeFilter) : data;
+  const filtered = filter.length || typeFilter !== "all" ? filterData(data, filter, typeFilter) : data;
   // console.warn("render");
   return (
     <div className="App">
