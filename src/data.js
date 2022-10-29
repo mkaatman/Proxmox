@@ -657,7 +657,8 @@
     "title": "EMQX LXC",
     "content": `<p align="center"><img src="https://github.com/hassio-addons/repository/blob/master/emqx/icon.png?raw=true" height="100"/></p>
   <h1 align="center" id="heading">EMQX LXC</h1>
-  [EMQX](https://www.emqx.io/) is an Open-source MQTT broker with a high-performance real-time message processing engine, powering event streaming for IoT devices at massive scale.
+  
+[EMQX](https://www.emqx.io/) is an Open-source MQTT broker with a high-performance real-time message processing engine, powering event streaming for IoT devices at massive scale.
   
   To create a new Proxmox EMQX LXC, run the following in the Proxmox Shell.
   

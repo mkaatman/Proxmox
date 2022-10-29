@@ -10,6 +10,8 @@ import rehypeRaw from 'rehype-raw';
 import RightArrow from "./components/right_arrow";
 import DownArrow from "./components/down_arrow";
 
+// TODO: Future, have a way to bookmark to specific entries
+
 // Copy icon reference:
 // https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/132
 
@@ -34,7 +36,7 @@ function debounce(fn, wait, immediate) {
   };
 }
 
-const types = data.items.map(item => item.type);
+// const types = data.items.map(item => item.type);
 
 function filterData(data, filter = "", typeFilter = "all") {
   // console.warn("filterData");
@@ -78,10 +80,10 @@ function App() {
     setExpandedCategories(newExpandedCategory);
   }, [expandedCategories]);
 
-  function handleTypeFilterClick(type) {
-    // console.warn("handleTypeFilterClick");
-    setTypeFilter(type);
-  }
+  // function handleTypeFilterClick(type) {
+  //   // console.warn("handleTypeFilterClick");
+  //   setTypeFilter(type);
+  // }
 
   function clearFilters() {
     setFilter("");
@@ -100,10 +102,10 @@ function App() {
       <p align="center"><a href="https://github.com/tteck/Proxmox/blob/main/LICENSE"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-blue" /></a> <a href="https://github.com/tteck/Proxmox/discussions"><img src="https://img.shields.io/badge/%F0%9F%92%AC-Discussions-orange" alt="Discussions" /></a> <a href="https://github.com/tteck/Proxmox/blob/main/CHANGELOG.MD"><img src="https://img.shields.io/badge/🔶-Changelog-blue" alt="Changelog" /></a> <a href="https://ko-fi.com/D1D7EP4GF"><img src="https://img.shields.io/badge/%E2%98%95-Buy%20me%20a%20coffee-red" alt="Buy me a coffee" /></a></p>
 
       <div className={"inputFilter"}>
-        <input type="text" onChange={handleFilter} value={filter} /> Filter
-        <span className="typeFilter">Type: {["all", ...new Set(types)].map(type =>
+        <input type="text" onChange={handleFilter} value={filter} /> Search
+        {/* <span className="typeFilter">Type: {["all", ...new Set(types)].map(type =>
           <span onClick={() => handleTypeFilterClick(type)} key={type} className={typeFilter === type ? "typeFilterSelected" : "typeFilterNotSelected"}> {type} </span>
-        )}</span>
+        )}</span> */}
       </div>
       {filtered.items.length === 0 && <div>No items match your criteria <button onClick={clearFilters}>Clear Filters</button></div>}
       {filtered.items?.map((item, index) => {
@@ -111,7 +113,9 @@ function App() {
           {/** Show Category 
             * Since Categories are flatted, only show the category the first time it appears whil mapping through.
             */}
-          {(index === 0 || filtered.items[index === 0 ? 0 : index - 1].category !== item.category) && <div onClick={() => handleCategoryClick(item.category)} className={"itemCategory"}><img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" />{item.category}{(((filter && item.title.toLowerCase().includes(filter.toLowerCase())) || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) ? <DownArrow className="navArrow" alt="Expanded" /> : <RightArrow className="navArrow" alt="Collapsed" />} </div>}
+          {(index === 0 || filtered.items[index === 0 ? 0 : index - 1].category !== item.category) && <div onClick={() => handleCategoryClick(item.category)} className={"itemCategory"}>
+            {/* <img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" /> */}
+            {item.category}{(((filter && item.title.toLowerCase().includes(filter.toLowerCase())) || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) ? <DownArrow className="navArrow" alt="Expanded" /> : <RightArrow className="navArrow" alt="Collapsed" />} </div>}
 
           {/* Show Item Title */}
           {(((filter && item.title.toLowerCase().includes(filter.toLowerCase())) || expandedItems.includes(item.title)) || expandedCategories.includes(item.category)) && <span onClick={() => handleExpandItem(item.title)} className={"itemTitle"}>{item.title}</span>}
