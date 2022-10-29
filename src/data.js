@@ -16,7 +16,7 @@
    }
  */
 
-   const data = {
+const data = {
   "categories": [
   {
     "title": "Proxmox Tools",
