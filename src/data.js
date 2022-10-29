@@ -72,9 +72,9 @@
     "category": "Proxmox Tools",
     "type": "utility",
     "title": "Proxmox VE 7 Post Install",
-    "content": `<p align="center"><img src="https://github.com/tteck/Proxmox/blob/main/misc/images/haos.png?raw=true"/></p>
+    "content": `<p align="center"><img src="https://github.com/home-assistant/brands/blob/master/core_integrations/proxmoxve/icon.png?raw=true" height="100"/></p>
    
-  <h1 align="center" id="heading"> Home Assistant OS VM </h1>
+  <h1 align="center" id="heading"> Proxmox VE 7 Post Install </h1>
   
   The script will give options to Disable the Enterprise Repo, Add/Correct PVE7 Sources, Enable the No-Subscription Repo, Add Test Repo, Disable Subscription Nag, Update Proxmox VE and Reboot PVE.
     
@@ -878,7 +878,7 @@
     "category": "Database",
     "type": "lxc",
     "title": "InfluxDB LXC",
-    "content": `<p align="center"><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdownload.logo.wine%2Flogo%2FInfluxDB%2FInfluxDB-Logo.wine.png&f=1&nofb=1&ipt=a5f235b07e11c34e55d573121e8cc56dbd7ae4aaeff335e961c16022f2c2299e&ipo=images" height="150"/></p>
+    "content": `<p align="center"><img src="https://d7umqicpi7263.cloudfront.net/img/product/83e3ab8e-540e-4391-b603-f65174ac0275/ea15d6da-1c4f-409f-8c24-4bbcfbb0d309.png" height="150"/></p>
   <h1 align="center" id="heading">InfluxDB LXC</h1>
   <h3 align="center"> Options to Install InfluxDB v1 or v2 and Telegraf</h3>
   
