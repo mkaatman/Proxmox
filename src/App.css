@@ -20,6 +20,12 @@ h1{
 h1 a{
   text-decoration: none;
 }
+
+.disclaimer {
+  margin-left:24px;
+  font-size: 14px;
+}
+
 .navArrow {
   margin-left:4px;
   height: 16px;
@@ -28,8 +34,8 @@ h1 a{
 }
 
 .itemCategory {
-  margin-top: 16px;
-  margin-bottom: 4px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 .item {

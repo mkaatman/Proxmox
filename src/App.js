@@ -98,11 +98,11 @@ function App() {
   return (
     <div className="App">
       <h2 align="center" id="heading">Select a Proxmox Helper</h2>
-      <p align="center"><sub>Always remember to use due diligence when sourcing scripts and automation tasks from third-party sites.</sub></p>
       <p align="center"><a href="https://github.com/tteck/Proxmox/blob/main/LICENSE"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-blue" /></a> <a href="https://github.com/tteck/Proxmox/discussions"><img src="https://img.shields.io/badge/%F0%9F%92%AC-Discussions-orange" alt="Discussions" /></a> <a href="https://github.com/tteck/Proxmox/blob/main/CHANGELOG.MD"><img src="https://img.shields.io/badge/🔶-Changelog-blue" alt="Changelog" /></a> <a href="https://ko-fi.com/D1D7EP4GF"><img src="https://img.shields.io/badge/%E2%98%95-Buy%20me%20a%20coffee-red" alt="Buy me a coffee" /></a></p>
 
       <div className={"inputFilter"}>
-        <input type="text" onChange={handleFilter} value={filter} /> Search
+        <span align="center"><input type="text" onChange={handleFilter} value={filter} /> Search</span>
+        <span align="center" className="disclaimer">Always remember to use due diligence when sourcing scripts and automation tasks from third-party sites.</span>
         {/* <span className="typeFilter">Type: {["all", ...new Set(types)].map(type =>
           <span onClick={() => handleTypeFilterClick(type)} key={type} className={typeFilter === type ? "typeFilterSelected" : "typeFilterNotSelected"}> {type} </span>
         )}</span> */}
