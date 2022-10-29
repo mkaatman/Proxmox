@@ -131,7 +131,7 @@ function App() {
       {filtered.items?.map((item, index) => {
         return <div className={"App-items"} key={item.title} >
           {/** Show Category 
-            * Since Categories are flatted, only show the category the first time it appears whil mapping through.
+            * Since Categories are flatted, only show the category the first time it appears while mapping through.
             */}
           {(index === 0 || filtered.items[index === 0 ? 0 : index - 1].category !== item.category) && <div onClick={() => handleCategoryClick(item.category)} className={"itemCategory"}>
             {/* <img className={"categoryLogo"} src={data.categories.filter(category => category.title === item.category)[0]?.logo_url || data.categories[0].logo_url} alt="logo" /> */}
