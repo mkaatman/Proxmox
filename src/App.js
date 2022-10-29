@@ -90,6 +90,15 @@ function App() {
     setExpandedCategories(newExpandedCategory);
   }, [expandedCategories]);
 
+  function expandAll() {
+    setExpandedCategories(data.categories.map(category => category.title));
+  }
+
+  function collapseAll() {
+    setExpandedItems([]);
+    setExpandedCategories([]);
+  }
+
   // function handleTypeFilterClick(type) {
   //   // console.warn("handleTypeFilterClick");
   //   setTypeFilter(type);
@@ -118,6 +127,7 @@ function App() {
         )}</span> */}
       </div>
       {filtered.items.length === 0 && <div>No items match your criteria <button onClick={clearFilters}>Clear Filters</button></div>}
+      <div><span onClick={expandAll}>+</span> / <span onClick={collapseAll}>-</span></div>
       {filtered.items?.map((item, index) => {
         return <div className={"App-items"} key={item.title} >
           {/** Show Category 
