@@ -746,7 +746,7 @@
   ~~~bash
   sudo mysql
   ~~~ 
-  Prompt will change to ~~~MariaDB [(none)]>~~~
+  Prompt will change to <code class="highlighter-rouge">MariaDB [(none)]></code>
   
   Create a new local admin (Change the username and password to match your preferences)
   ~~~sql

@@ -10,12 +10,33 @@ import rehypeRaw from 'rehype-raw';
 import RightArrow from "./components/right_arrow";
 import DownArrow from "./components/down_arrow";
 
-// TODO: Add a function to copy bash script
+// Copy icon reference:
+// https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/132
+
+function debounce(fn, wait, immediate) {
+  let timeout;
+
+  return (...args) => {
+    const context = this;
+
+    const later = () => {
+      timeout = null;
+      if (!immediate) fn.apply(context, args);
+    };
+
+    const callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+
+    if (callNow) {
+      fn.apply(context, args);
+    }
+  };
+}
 
 const types = data.items.map(item => item.type);
 
 function filterData(data, filter = "", typeFilter = "all") {
-  console.warn("filtering data");
   if (typeFilter === "all" && filter.length < 3) return data;
 
   const typeFilteredItems = {};
@@ -25,7 +46,6 @@ function filterData(data, filter = "", typeFilter = "all") {
 
   const filtered = {};
   filtered.items = filter.length > 3 ? typeFilteredItems.items.filter(item => {
-    console.warn("filtering", filter);
     // console.warn("title", filter.toLowerCase(), item.title.toLowerCase(), item.title.toLowerCase().includes(filter.toLowerCase()));
     // console.warn("content", filter.toLowerCase(), item.content.toLowerCase(), item.content.toLowerCase().includes(filter.toLowerCase()));
     return item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase());
@@ -41,8 +61,7 @@ function App() {
   const [expandedCategories, setExpandedCategories] = useState([]);
 
   function handleFilter(event) {
-    // TODO: Add a debounce here
-    setFilter(event.target.value);
+    debounce(setFilter(event.target.value), 300);
   }
 
   const handleExpandItem = useCallback((event) => {
@@ -68,8 +87,8 @@ function App() {
 
   return (
     <div className="App">
-      <h2 align="center" id="heading"> Select a Proxmox Helper </h2>
-      <p align="center"><sub> Always remember to use due diligence when sourcing scripts and automation tasks from third-party sites. </sub></p>
+      <h2 align="center" id="heading">Select a Proxmox Helper</h2>
+      <p align="center"><sub>Always remember to use due diligence when sourcing scripts and automation tasks from third-party sites.</sub></p>
       <p align="center"><a href="https://github.com/tteck/Proxmox/blob/main/LICENSE"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-blue" /></a> <a href="https://github.com/tteck/Proxmox/discussions"><img src="https://img.shields.io/badge/%F0%9F%92%AC-Discussions-orange" alt="Discussions" /></a> <a href="https://github.com/tteck/Proxmox/blob/main/CHANGELOG.MD"><img src="https://img.shields.io/badge/🔶-Changelog-blue" alt="Changelog" /></a> <a href="https://ko-fi.com/D1D7EP4GF"><img src="https://img.shields.io/badge/%E2%98%95-Buy%20me%20a%20coffee-red" alt="Buy me a coffee" /></a></p>
 
       <div className={"inputFilter"}>
@@ -110,25 +129,36 @@ const AppItem = memo(function AppItem({index, filtered, item, filter, expandedIt
           rehypePlugins={[rehypeRaw]}
           components={{
             code({ node, inline, className, children, ...props }) {
-              const match = /language-(\w+)/.exec(className || '')
+              const match = /language-(\w+)/.exec(className || '');
               return !inline && match ? (
-                <SyntaxHighlighter
-                  children={String(children).replace(/\n$/, '')}
-                  style={coldarkDark}
-                  language={match[1]}
-                  PreTag="div"
-                  {...props}
-                />
+                <>
+                  <CopyButton valueToCopy={String(children)} />
+                  <SyntaxHighlighter
+                    children={String(children).replace(/\n$/, '')}
+                    style={coldarkDark}
+                    language={match[1]}
+                    PreTag="div"
+                    {...props}
+                  />
+                </>
               ) : (
                 <code className={className} {...props}>
                   {children}
                 </code>
-              )
+              );
             }
           }}
         />
       </div>}
   </div>
 });
+
+function CopyButton({valueToCopy}) {
+  function handleClick(text) {
+    navigator.clipboard.writeText(text);
+  }
+
+  return <button onClick={() => handleClick(valueToCopy)}>Copy</button>;
+}
 
 export default App;
