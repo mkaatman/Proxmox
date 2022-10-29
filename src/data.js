@@ -1,6 +1,6 @@
 /** Notes:
  * It suppports a mix of HTML and markdown
- * Use ~~~ instead of ~~~ for markdown syntax highlighting. You can also use <code class="highlighter-rouge">code here</code>
+ * Use ~~~ instead of ``` for markdown syntax highlighting. You can also use <code class="highlighter-rouge">code here</code>
  * Sometimes the white space at the start of a line within content can be picky, if it's not formatting, try removing white space.
  * This is because it tries to treat four or more spaces as code
  * An item category has to be present in the categories array or kaboom
@@ -657,7 +657,7 @@
     "title": "EMQX LXC",
     "content": `<p align="center"><img src="https://github.com/hassio-addons/repository/blob/master/emqx/icon.png?raw=true" height="100"/></p>
   <h1 align="center" id="heading">EMQX LXC</h1>
-  
+
 [EMQX](https://www.emqx.io/) is an Open-source MQTT broker with a high-performance real-time message processing engine, powering event streaming for IoT devices at massive scale.
   
   To create a new Proxmox EMQX LXC, run the following in the Proxmox Shell.

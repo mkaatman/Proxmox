@@ -40,6 +40,7 @@ function debounce(fn, wait, immediate) {
 
 function filterData(data, filter = "", typeFilter = "all") {
   // console.warn("filterData");
+  
   if (typeFilter === "all" && filter.length) return data;
 
   const typeFilteredItems = {};
@@ -62,7 +63,16 @@ function App() {
   const [typeFilter, setTypeFilter] = useState("all");
   const [expandedItems, setExpandedItems] = useState([]);
   const [expandedCategories, setExpandedCategories] = useState([]);
-
+  // Alphabetize categories
+  // data.items.sort((fa, fb) => {
+  //   if (fa.category < fb.category) {
+  //     return -1;
+  //   }
+  //   if (fa.category > fb.category) {
+  //       return 1;
+  //   }
+  //   return 0;
+  // });
   function handleFilter(event) {
     // console.warn("handleFilter");
     debounce(setFilter(event.target.value), 300);
